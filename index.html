@@ -3398,6 +3398,67 @@ body::after{
   pointer-events:none !important;
 }
 
+
+
+/* === AJUSTE: transição suave entre Manifesto e História === */
+/* Cria uma área de respiro antes do título da História e remove o corte seco entre os fundos. */
+.manifesto{
+  overflow:visible !important;
+}
+.manifesto::after{
+  /* mantém o clima do manifesto, mas impede que a camada avance como uma faixa sobre a próxima seção */
+  inset:-14vh 0 0 0 !important;
+  background:
+    radial-gradient(circle at var(--light-x) var(--light-y), rgba(255,232,178,.035) 0%, rgba(255,232,178,.014) 7%, transparent 18%),
+    linear-gradient(180deg,
+      rgba(3,7,17,.18) 0%,
+      rgba(3,7,17,.07) 18%,
+      rgba(3,7,17,.03) 42%,
+      rgba(3,7,17,.12) 72%,
+      rgba(3,7,17,.34) 100%) !important;
+}
+.story-interactive{
+  position:relative !important;
+  z-index:8 !important;
+  padding-top:clamp(150px, 13vw, 230px) !important;
+  overflow:visible !important;
+  isolation:isolate !important;
+  scroll-margin-top:clamp(96px, 12vh, 150px);
+}
+.story-interactive::before{
+  content:"" !important;
+  display:block !important;
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(-1 * clamp(220px, 28vh, 380px));
+  height:clamp(520px, 62vh, 760px);
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 75% 55% at 54% 42%, rgba(215,169,74,.055), transparent 64%),
+    linear-gradient(180deg,
+      rgba(3,7,17,0) 0%,
+      rgba(3,7,17,.18) 16%,
+      rgba(4,11,25,.62) 42%,
+      rgba(4,11,25,.78) 58%,
+      rgba(4,11,25,.36) 78%,
+      rgba(3,7,17,0) 100%);
+}
+.story-interactive .split{
+  position:relative;
+  z-index:1;
+}
+@media(max-width:900px){
+  .story-interactive{
+    padding-top:clamp(112px, 18vw, 170px) !important;
+  }
+  .story-interactive::before{
+    top:-240px;
+    height:520px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3634,7 +3695,7 @@ body::after{
 </div>
 </div>
 </section>
-<footer class="footer">Nossa Senhora do Perpétuo Socorro, rogai por nós.</footer>
+<footer class="footer">Que o Perpétuo Socorro de Maria acompanhe seus passos.</footer>
 <section class="footer-brand" aria-label="Aramon Artigos Religiosos">
   <div class="footer-brand__inner">
     <img class="footer-brand__logo" src="assets/image_10_f30fc2a7cfed.png" alt="Aramon Artigos Religiosos" loading="lazy" decoding="async">
