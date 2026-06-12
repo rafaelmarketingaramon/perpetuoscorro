@@ -3380,6 +3380,24 @@ body::after{
 }
 
 
+
+/* === FIX: remove camada da próxima seção sobre o hero/logo === */
+.hero{
+  z-index:20 !important;
+}
+.hero-brand-scroll{
+  z-index:30 !important;
+}
+.manifesto{
+  margin-top:0 !important;
+  padding-top:0 !important;
+  z-index:3 !important;
+}
+.manifesto::before,
+.manifesto::after{
+  pointer-events:none !important;
+}
+
 </style>
 </head>
 <body>
