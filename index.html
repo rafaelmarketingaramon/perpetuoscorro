@@ -3044,7 +3044,7 @@ body::after{
   border:0 !important;
 }
 
-/* Vídeo limpo, sem máscara — o hero::before cuida do fade */
+/* Vídeo limpo, sem máscara e sem degradê sobreposto */
 .hero-video{
   opacity:1 !important;
   filter:contrast(1.04) saturate(.92) brightness(.90) !important;
@@ -3060,6 +3060,260 @@ body::after{
   display:none !important;
 }
 
+
+
+/* === SEÇÃO HISTÓRIA INTERATIVA — somente esta seção foi alterada === */
+.story-interactive{
+  --story-active-x:44%;
+  --story-active-y:32%;
+  --story-rx:0deg;
+  --story-ry:0deg;
+  --story-mx:0px;
+  --story-my:0px;
+  padding-top:clamp(86px,7vw,118px) !important;
+  padding-bottom:clamp(78px,7vw,112px) !important;
+}
+.story-interactive .split{
+  align-items:center !important;
+}
+.story-interactive .story-visual{
+  perspective:1200px;
+  min-height:clamp(560px,48vw,680px) !important;
+}
+.story-interactive .story-visual-wrap{
+  position:relative;
+  width:min(520px,85%);
+  transform:translate3d(var(--story-mx),var(--story-my),0) rotateX(var(--story-rx)) rotateY(var(--story-ry));
+  transform-style:preserve-3d;
+  transition:transform .55s var(--ease), filter .55s var(--ease);
+  will-change:transform;
+}
+.story-interactive .story-visual-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-12%;
+  border-radius:38px;
+  background:
+    radial-gradient(circle at var(--story-active-x) var(--story-active-y), rgba(255,227,163,.26), rgba(215,169,74,.08) 20%, transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(215,169,74,.14), transparent 64%);
+  filter:blur(12px);
+  opacity:.95;
+  pointer-events:none;
+  transform:translateZ(-1px);
+}
+.story-interactive .story-visual-wrap::after{
+  content:"";
+  position:absolute;
+  left:var(--story-active-x);
+  top:var(--story-active-y);
+  width:210px;
+  height:210px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,227,163,.20), rgba(215,169,74,.08) 38%, transparent 68%);
+  mix-blend-mode:screen;
+  filter:blur(3px);
+  pointer-events:none;
+  opacity:.82;
+  transition:left .45s var(--ease), top .45s var(--ease), opacity .45s var(--ease);
+}
+.story-interactive .image-free::before{
+  opacity:.62 !important;
+  transform:scale(1.04);
+}
+.story-interactive .image-free img{
+  width:100% !important;
+  border-radius:28px;
+  filter:drop-shadow(0 42px 98px rgba(0,0,0,.70)) saturate(1.04) contrast(1.02) !important;
+  transition:filter .45s var(--ease), transform .45s var(--ease);
+}
+.story-interactive .story-hotspot{
+  position:absolute;
+  z-index:4;
+  width:48px;
+  height:48px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  border:1px solid rgba(255,227,163,.55);
+  background:rgba(5,9,20,.56);
+  color:var(--gold2);
+  font:900 13px/1 Inter,ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:-.04em;
+  cursor:pointer;
+  box-shadow:0 18px 42px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.05);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  transform:translate(-50%,-50%) translateZ(28px);
+  transition:transform .32s var(--ease), background .32s var(--ease), border-color .32s var(--ease), box-shadow .32s var(--ease), color .32s var(--ease);
+}
+.story-interactive .story-hotspot::before{
+  content:"";
+  position:absolute;
+  inset:-9px;
+  border-radius:inherit;
+  border:1px solid rgba(255,227,163,.22);
+  opacity:.75;
+  animation:storyPulse 2.6s ease-in-out infinite;
+}
+.story-interactive .story-hotspot span{
+  position:relative;
+  z-index:1;
+}
+.story-interactive .story-hotspot:hover,
+.story-interactive .story-hotspot:focus-visible,
+.story-interactive .story-hotspot.active{
+  background:linear-gradient(180deg,var(--gold2),var(--gold));
+  color:#061023;
+  border-color:rgba(255,247,218,.94);
+  transform:translate(-50%,-50%) translateZ(42px) scale(1.08);
+  box-shadow:0 20px 58px rgba(215,169,74,.30), 0 0 0 7px rgba(215,169,74,.12);
+  outline:none;
+}
+.story-interactive .story-hotspot--look{left:39%;top:34%;}
+.story-interactive .story-hotspot--passion{left:73%;top:21%;}
+.story-interactive .story-hotspot--help{left:58%;top:66%;}
+.story-interactive[data-story-active="01"]{--story-active-x:39%;--story-active-y:34%;}
+.story-interactive[data-story-active="02"]{--story-active-x:73%;--story-active-y:21%;}
+.story-interactive[data-story-active="03"]{--story-active-x:58%;--story-active-y:66%;}
+.story-interactive .story-hint{
+  position:absolute;
+  left:50%;
+  bottom:-22px;
+  z-index:5;
+  transform:translateX(-50%) translateZ(34px);
+  white-space:nowrap;
+  padding:10px 16px;
+  border:1px solid rgba(255,227,163,.24);
+  border-radius:999px;
+  background:rgba(3,7,17,.72);
+  color:rgba(247,239,226,.78);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  box-shadow:0 18px 44px rgba(0,0,0,.28);
+  backdrop-filter:blur(12px);
+}
+.story-interactive .story-mini-guide{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:26px 0 -8px;
+  max-width:620px;
+  color:rgba(255,227,163,.72);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.story-interactive .story-mini-guide i{
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg, rgba(215,169,74,.42), rgba(215,169,74,.08));
+}
+.story-interactive .story-mini-guide b{
+  color:var(--gold2);
+  font-size:15px;
+  letter-spacing:-.04em;
+}
+.story-interactive .info-stack{
+  gap:12px !important;
+  margin-top:34px !important;
+}
+.story-interactive .info-row{
+  position:relative;
+  width:100%;
+  appearance:none;
+  -webkit-appearance:none;
+  text-align:left;
+  color:var(--text);
+  font:inherit;
+  cursor:pointer;
+  border:1px solid rgba(215,169,74,.10) !important;
+  border-radius:24px !important;
+  padding:20px 22px !important;
+  background:linear-gradient(90deg, rgba(255,227,163,.045), rgba(255,255,255,.012)) !important;
+  box-shadow:0 0 0 rgba(0,0,0,0);
+  overflow:hidden;
+  transition:transform .34s var(--ease), border-color .34s var(--ease), background .34s var(--ease), box-shadow .34s var(--ease), opacity .34s var(--ease);
+}
+.story-interactive .info-row::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:linear-gradient(180deg,var(--gold2),var(--gold));
+  opacity:0;
+  transition:opacity .34s var(--ease);
+}
+.story-interactive .info-row::after{
+  content:"";
+  position:absolute;
+  right:18px;
+  top:18px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--gold2);
+  box-shadow:0 0 18px rgba(255,227,163,.74);
+  opacity:0;
+  transition:opacity .34s var(--ease), transform .34s var(--ease);
+}
+.story-interactive .info-row:hover,
+.story-interactive .info-row:focus-visible,
+.story-interactive .info-row.active{
+  transform:translateX(8px);
+  border-color:rgba(255,227,163,.36) !important;
+  background:linear-gradient(90deg, rgba(215,169,74,.15), rgba(255,255,255,.026)) !important;
+  box-shadow:0 20px 68px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
+  outline:none;
+}
+.story-interactive .info-row.active::before,
+.story-interactive .info-row.active::after,
+.story-interactive .info-row:hover::after,
+.story-interactive .info-row:focus-visible::after{
+  opacity:1;
+}
+.story-interactive .info-row:hover::after,
+.story-interactive .info-row:focus-visible::after{
+  transform:scale(1.35);
+}
+.story-interactive .info-row .num{
+  color:var(--gold2) !important;
+  text-shadow:0 0 24px rgba(215,169,74,.24);
+}
+.story-interactive .info-row h3{
+  margin-right:24px !important;
+}
+.story-interactive .info-row p{
+  color:rgba(248,255,240,.72) !important;
+}
+@keyframes storyPulse{
+  0%,100%{transform:scale(.92);opacity:.24;}
+  50%{transform:scale(1.18);opacity:.78;}
+}
+@media(max-width:1200px){
+  .story-interactive .story-visual{min-height:520px !important;}
+  .story-interactive .story-visual-wrap{width:min(460px,78%);}
+}
+@media(max-width:900px){
+  .story-interactive .split{grid-template-columns:1fr !important;}
+  .story-interactive .story-visual{min-height:auto !important;padding:24px 0 44px;}
+  .story-interactive .story-visual-wrap{width:min(480px,92%);}
+  .story-interactive .story-hint{font-size:10px;bottom:-18px;}
+  .story-interactive .info-row{transform:none !important;}
+}
+@media(max-width:520px){
+  .story-interactive .story-hotspot{width:42px;height:42px;font-size:12px;}
+  .story-interactive .info-row{grid-template-columns:58px 1fr !important;padding:18px 16px !important;}
+  .story-interactive .info-row .num{font-size:28px !important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .story-interactive .story-hotspot::before{animation:none;}
+  .story-interactive .story-visual-wrap{transform:none !important;}
+}
 
 
 </style>
@@ -3122,19 +3376,26 @@ body::after{
 </div>
 </div>
 </section>
-<section class="section story" id="historia">
+<section class="section story story-interactive" id="historia" data-story-section data-story-active="01">
 <div class="split">
-<div class="image-free reveal">
+<div class="image-free reveal story-visual">
+<div class="story-visual-wrap" data-story-visual>
 <img alt="Nossa Senhora do Perpétuo Socorro" src="assets/image_04_8c2664360c55.webp" loading="lazy" decoding="async">
+<button class="story-hotspot story-hotspot--look active" type="button" data-story-point="01" aria-label="Destacar o olhar da Mãe"><span>01</span></button>
+<button class="story-hotspot story-hotspot--passion" type="button" data-story-point="02" aria-label="Destacar os sinais da Paixão"><span>02</span></button>
+<button class="story-hotspot story-hotspot--help" type="button" data-story-point="03" aria-label="Destacar o socorro que permanece"><span>03</span></button>
+<div class="story-hint" aria-hidden="true">Toque nos detalhes do ícone</div>
 </div>
-<div class="reveal">
+</div>
+<div class="reveal story-copy">
 <div class="kicker">História da devoção</div>
 <h2 class="title">Uma imagem que <span class="accent">fala</span> com quem reza.</h2>
 <p class="lead">Diante do ícone, o coração reconhece uma Mãe que não se afasta: Maria acolhe o Menino, contempla nossas dores e recorda que, em Jesus, nenhum pedido fica sem amparo.</p>
-<div class="info-stack">
-<div class="info-row"><div class="num">01</div><div><h3>O olhar da Mãe</h3><p>Maria segura o Menino com ternura e firmeza, como quem acolhe também as angústias de cada filho que se aproxima.</p></div></div>
-<div class="info-row"><div class="num">02</div><div><h3>Os sinais da Paixão</h3><p>Os anjos trazem os instrumentos da entrega de Cristo; no colo da Mãe, o medo encontra repouso e a fé aprende a confiar.</p></div></div>
-<div class="info-row"><div class="num">03</div><div><h3>O socorro que permanece</h3><p>A devoção atravessa gerações porque fala ao coração: nas horas difíceis, há uma Mãe que intercede e conduz a Jesus.</p></div></div>
+<div class="story-mini-guide" aria-hidden="true"><span>Explore</span><i></i><b data-story-guide>01</b></div>
+<div class="info-stack" role="list" aria-label="Detalhes interativos do ícone">
+<button class="info-row active" type="button" role="listitem" data-story-item="01" aria-pressed="true"><div class="num">01</div><div><h3>O olhar da Mãe</h3><p>Maria segura o Menino com ternura e firmeza, como quem acolhe também as angústias de cada filho que se aproxima.</p></div></button>
+<button class="info-row" type="button" role="listitem" data-story-item="02" aria-pressed="false"><div class="num">02</div><div><h3>Os sinais da Paixão</h3><p>Os anjos trazem os instrumentos da entrega de Cristo; no colo da Mãe, o medo encontra repouso e a fé aprende a confiar.</p></div></button>
+<button class="info-row" type="button" role="listitem" data-story-item="03" aria-pressed="false"><div class="num">03</div><div><h3>O socorro que permanece</h3><p>A devoção atravessa gerações porque fala ao coração: nas horas difíceis, há uma Mãe que intercede e conduz a Jesus.</p></div></button>
 </div>
 </div>
 </div>
@@ -3601,6 +3862,54 @@ flowTabs.forEach(tab => {
 
   dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
   animate();
+})();
+</script>
+
+
+<script>
+(() => {
+  const section = document.querySelector('[data-story-section]');
+  if(!section) return;
+  const items = [...section.querySelectorAll('[data-story-item]')];
+  const points = [...section.querySelectorAll('[data-story-point]')];
+  const guide = section.querySelector('[data-story-guide]');
+  const visual = section.querySelector('[data-story-visual]');
+
+  const activate = (id) => {
+    section.dataset.storyActive = id;
+    if(guide) guide.textContent = id;
+    items.forEach(item => {
+      const active = item.dataset.storyItem === id;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    points.forEach(point => point.classList.toggle('active', point.dataset.storyPoint === id));
+  };
+
+  [...items, ...points].forEach(el => {
+    const id = el.dataset.storyItem || el.dataset.storyPoint;
+    el.addEventListener('mouseenter', () => activate(id));
+    el.addEventListener('focus', () => activate(id));
+    el.addEventListener('click', () => activate(id));
+  });
+
+  if(visual && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    visual.addEventListener('mousemove', (event) => {
+      const rect = visual.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      section.style.setProperty('--story-ry', `${(x * 5).toFixed(2)}deg`);
+      section.style.setProperty('--story-rx', `${(-y * 4).toFixed(2)}deg`);
+      section.style.setProperty('--story-mx', `${(x * 10).toFixed(2)}px`);
+      section.style.setProperty('--story-my', `${(y * 8).toFixed(2)}px`);
+    });
+    visual.addEventListener('mouseleave', () => {
+      section.style.setProperty('--story-ry', '0deg');
+      section.style.setProperty('--story-rx', '0deg');
+      section.style.setProperty('--story-mx', '0px');
+      section.style.setProperty('--story-my', '0px');
+    });
+  }
 })();
 </script>
 
