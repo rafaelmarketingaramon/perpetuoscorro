@@ -3316,6 +3316,70 @@ body::after{
 }
 
 
+/* === LOGOTIPO CENTRALIZADO NO HERO — convite para scroll === */
+.hero-brand-scroll{
+  position:absolute;
+  left:50%;
+  bottom:clamp(38px,7vh,82px);
+  z-index:5;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  width:min(340px,42vw);
+  pointer-events:auto;
+  opacity:0;
+  animation:heroBrandIn 1.15s var(--ease) .42s forwards, heroBrandFloat 4.8s ease-in-out 1.65s infinite;
+}
+.hero-brand-scroll img{
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 22px 46px rgba(0,0,0,.55));
+}
+.hero-brand-scroll::after{
+  content:"";
+  width:1px;
+  height:34px;
+  background:linear-gradient(180deg, rgba(248,255,240,.78), rgba(215,169,74,.58), transparent);
+  opacity:.78;
+  animation:heroScrollCue 1.9s ease-in-out infinite;
+}
+.hero-brand-scroll:hover{
+  filter:brightness(1.08);
+}
+@keyframes heroBrandIn{
+  from{opacity:0;transform:translateX(-50%) translateY(18px) scale(.96);}
+  to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
+}
+@keyframes heroBrandFloat{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  50%{transform:translateX(-50%) translateY(-8px);}
+}
+@keyframes heroScrollCue{
+  0%,100%{transform:translateY(0);opacity:.35;}
+  50%{transform:translateY(9px);opacity:.95;}
+}
+@media(max-width:720px){
+  .hero-brand-scroll{
+    width:min(250px,58vw);
+    bottom:clamp(28px,6vh,54px);
+    gap:10px;
+  }
+  .hero-brand-scroll::after{height:26px;}
+}
+@media(max-height:680px){
+  .hero-brand-scroll{width:min(260px,34vw);bottom:26px;}
+  .hero-brand-scroll::after{height:24px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-brand-scroll,
+  .hero-brand-scroll::after{animation:none !important;opacity:1;}
+}
+
+
 </style>
 </head>
 <body>
@@ -3340,6 +3404,9 @@ body::after{
 <video aria-label="Vídeo de Nossa Senhora do Perpétuo Socorro" autoplay="" class="hero-video" loop="" muted="" playsinline="" preload="auto">
 <source src="assets/video_hero_novo.mp4" type="video/mp4"/>
 </video>
+<a class="hero-brand-scroll" href="#manifesto" aria-label="Rolar para continuar no site">
+  <img src="assets/logo_aramon_scroll.png" alt="Aramon Artigos Religiosos" decoding="async">
+</a>
 <div class="hero-title"><span>Mãe de Deus da Paixão</span></div>
 </header>
 <section class="manifesto" id="manifesto">
